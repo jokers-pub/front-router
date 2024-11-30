@@ -1,6 +1,6 @@
 # Joker Router ![NPM Version](https://img.shields.io/npm/v/%40joker.front%2Frouter)
 
-`@joker.front/router` serves as the core routing component within the Joker front-end framework. It plays a crucial role in handling the navigation and URL management of web applications, similar to how vue-router functions in Vue.js projects.
+`@joker.front/router` serves as the core routing component within the Joker front-end framework. It plays a crucial role in handling the navigation and URL management of web applications.
 
 ## How To Use
 
@@ -63,7 +63,7 @@ export default class extends Component {
 
 # Joker Router
 
-`@joker.front/router`是 Joker 前端框架的核心路由组件，其功能与 vue-router 基本一致，在 Web 应用的导航和 URL 管理方面起着关键作用。
+`@joker.front/router`是 Joker 前端框架的核心路由组件，在 Web 应用的导航和 URL 管理方面起着关键作用。
 
 ## 如何使用
 
