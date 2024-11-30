@@ -1,4 +1,4 @@
-# Joker Router
+# Joker Router ![NPM Version](https://img.shields.io/npm/v/%40joker.front%2Frouter)
 
 `@joker.front/router` serves as the core routing component within the Joker front-end framework. It plays a crucial role in handling the navigation and URL management of web applications, similar to how vue-router functions in Vue.js projects.
 
