@@ -1,0 +1,11 @@
+<template>
+    我是a底部
+    <a href="#/b">去b</a>
+</template>
+<script>
+import { Component } from "@joker.front/core";
+
+export default class extends Component {
+    model = {};
+}
+</script>

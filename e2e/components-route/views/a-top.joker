@@ -1,0 +1,10 @@
+<template>
+    我是a头部
+</template>
+<script>
+import { Component } from "@joker.front/core";
+
+export default class extends Component {
+    model = {};
+}
+</script>

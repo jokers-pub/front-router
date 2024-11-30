@@ -1,0 +1,14 @@
+<template>
+    我是a1内容 (@props.data
+    )
+    <a href="#/a/a2/@(Date.now())">去a2</a>
+</template>
+<script>
+import { Component } from "@joker.front/core";
+
+export default class extends Component<{ data: number }> {
+    mounted() {
+        console.log(1);
+    }
+}
+</script>

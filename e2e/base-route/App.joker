@@ -1,0 +1,14 @@
+<template>
+    <div>
+        <router-view></router-view>
+    </div>
+</template>
+
+<script>
+import { Component } from "@joker.front/core";
+
+export default class extends Component {}
+</script>
+
+<style>
+</style>

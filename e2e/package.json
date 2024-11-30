@@ -1,0 +1,16 @@
+{
+    "name": "@joker/router-e2e",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "joker --log=debug"
+    },
+    "author": "Zohar",
+    "license": "MIT",
+    "dependencies": {
+        "@joker.front/cli": "^1.1.129",
+        "@joker.front/core": "^1.3.7",
+        "@joker.front/router": "workspace:^1.0.1"
+    }
+}

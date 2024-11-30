@@ -1,0 +1,24 @@
+<template>
+    我是a页面a
+    <a href="javascript:void(0)" @click="goB(false)">跳转b</a>
+    ||
+    <a href="javascript:void(0)" @click="goB(true)">强制跳转b</a>
+</template>
+<script>
+import { Component, VNode } from "@joker.front/core";
+import { router } from "@joker.front/router";
+
+export default class extends Component {
+    model = {};
+
+    goB(e: VNode.Event<boolean>, refresh: boolean) {
+        router.push({
+            path: "b",
+            refresh
+        });
+    }
+}
+</script>
+
+<style>
+</style>
