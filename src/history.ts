@@ -219,10 +219,19 @@ export class WebHistory implements IRouteHistory {
     private changeLocation(to: string, state: HistoryState, replace: boolean): void {
         let hashIndex = this.base.indexOf("#");
 
-        let url =
-            hashIndex > -1
-                ? this.base.slice(hashIndex) + to
-                : window.location.protocol + "//" + window.location.host + this.base + to;
+        let url = "";
+        if (hashIndex > -1) {
+            url = this.base.slice(hashIndex) + to;
+        } else {
+            url = window.location.protocol + "//" + window.location.host + this.base;
+            if (url.endsWith("/") && to.startsWith("/")) {
+                url += to.substring(1);
+            }
+
+            if (url.endsWith("/")) {
+                url = url.slice(0, -1);
+            }
+        }
 
         try {
             history[replace ? "replaceState" : "pushState"](state, "", url);
