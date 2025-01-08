@@ -57,7 +57,7 @@ export default class extends Component {
 
 [Official Website](https://front.jokers.pub)
 
-[Help Docs](https://front.jokers.pub#/router)
+[Help Docs](https://front.jokers.pub/router/introduction)
 
 [Low-Code Platform](https://jokers.pub)
 
@@ -120,6 +120,6 @@ export default class extends Component {
 
 [官网](http://www.jokers.pub)
 
-[帮助文档](http://www.jokers.pub#/router)
+[帮助文档](https://front.jokers.pub/router/introduction)
 
 [低代码平台](https://jokers.pub)

@@ -74,7 +74,7 @@ export class Router {
     /**
      * ready监听回调
      */
-    private readyCallbacks = useCallbacks<[() => void, (err?: any) => void]>();
+    private readyCallbacks = useCallbacks<(err?: any) => void>();
 
     /**
      * 移除history监听
@@ -112,7 +112,13 @@ export class Router {
         if (this.readyState && this.route.isChanged) return Promise.resolve();
 
         return new Promise((resolve, reject) => {
-            this.readyCallbacks.add([resolve, reject]);
+            this.readyCallbacks.add((err) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
         });
     }
 
@@ -603,9 +609,8 @@ export class Router {
 
             this.initHistoryListener();
 
-            this.readyCallbacks.callbacks.forEach(([resolve, reject]) => {
-                if (err) reject(err);
-                else resolve();
+            this.readyCallbacks.callbacks.forEach((n) => {
+                n(err);
             });
 
             this.readyCallbacks.reset();
