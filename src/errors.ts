@@ -30,23 +30,22 @@ export function createRouterError(
 
     switch (type) {
         case NavigationErrorTypes.MATCHER_NOT_FOUND:
-            message = `跳转到${JSON.stringify(data.to)}时，未找到目标路由记录`;
+            message = `No matching route record found when navigating to ${JSON.stringify(data.to)}`;
             break;
         case NavigationErrorTypes.REDIRECT:
-            message = `路由从${data.from.fullPath}重定向到${JSON.stringify(data.to)}`;
+            message = `Route redirected from ${data.from.fullPath} to ${JSON.stringify(data.to)}`;
             break;
         case NavigationErrorTypes.ABORTED:
-            message = `路由从${data.from.fullPath}跳转到${(data.to as RouteLocation).fullPath}时被终止`;
+            message = `Navigation from ${data.from.fullPath} to ${(data.to as RouteLocation).fullPath} was aborted`;
             break;
         case NavigationErrorTypes.CANCELLED:
-            message = `路由从${data.from.fullPath}跳转到${(data.to as RouteLocation).fullPath}时被取消`;
+            message = `Navigation from ${data.from.fullPath} to ${(data.to as RouteLocation).fullPath} was cancelled`;
             break;
-
         case NavigationErrorTypes.SAME:
-            message = `${data.from.fullPath}存在多条冗余路由配置，请及时清理`;
+            message = `Multiple redundant route configurations detected for ${data.from.fullPath}. Please clean them up.`;
             break;
         default:
-            message = "路由发生未知异常";
+            message = "An unknown routing error occurred";
             break;
     }
 

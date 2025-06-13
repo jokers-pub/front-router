@@ -1,6 +1,7 @@
 import { getCurrentScrollPosition, ScrollPosition } from "./scroll";
 import { remove, logger } from "@joker.front/shared";
 import { LOGTAG } from "./config";
+import { stripBase } from "./utils";
 
 export type HistoryState = Record<string | number, any> & {
     back: string | null;
@@ -98,7 +99,10 @@ export class WebHistory implements IRouteHistory {
         });
 
         if (!history.state) {
-            logger.warn(LOGTAG, "history.state似乎被手动替换或移除了，该值丢失了。");
+            logger.warn(
+                LOGTAG,
+                "It appears that history.state has been manually replaced or removed, causing the value to be lost."
+            );
         }
 
         this.changeLocation(currentState.current, currentState, true);
@@ -281,19 +285,11 @@ export class WebHashHistory extends WebHistory {
         }
 
         if (base.endsWith("#/") === false && base.endsWith("#") === false) {
-            logger.warn(LOGTAG, `该Hash必须以'#'/'#/'结尾：${base}`);
+            logger.warn(LOGTAG, `The hash must end with '#' or '#/': ${base}`);
         }
 
         super(base);
     }
-}
-
-function stripBase(pathname: string, base: string): string {
-    if (base === "/") return pathname;
-    if (!base || !pathname.toLocaleLowerCase().startsWith(base.toLowerCase())) {
-        return pathname;
-    }
-    return pathname.slice(base.length) || "/";
 }
 
 function createState(

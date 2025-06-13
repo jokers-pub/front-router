@@ -99,7 +99,11 @@ export class Router {
 
         if (this.route.isChanged === false) {
             this.push(this.routerHistory.location).catch((e) => {
-                logger.warn(LOGTAG, `首次启动跳转默认地址失败：${this.routerHistory.location}`, e);
+                logger.warn(
+                    LOGTAG,
+                    `Failed to navigate to default address on first startup: ${this.routerHistory.location}`,
+                    e
+                );
             });
         }
     }
@@ -147,7 +151,7 @@ export class Router {
         if (recordMatcher) {
             this.matcher.removeRoute(recordMatcher);
         } else {
-            logger.warn("路由", `removeRoute时，找到指定的路由记录，路由名称："${String(name)}"`);
+            logger.warn("Routing", `Route record found when calling removeRoute, route name: "${String(name)}"`);
         }
     }
 
@@ -630,7 +634,7 @@ export class Router {
                 throw err;
             }
 
-            logger.warn(LOGTAG, "路由跳转发生异常", err);
+            logger.warn(LOGTAG, "An exception occurred during route navigation", err);
         }
 
         //为了在catch中作为返回值直接返回

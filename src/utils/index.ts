@@ -83,3 +83,10 @@ function isEqualArray<T>(a: T[] | T, b: T[] | T): boolean {
     let bArray = [b].flat();
     return aArray.length === bArray.length && aArray.every((value, i) => value === bArray[i]);
 }
+export function stripBase(pathname: string, base: string): string {
+    if (base === "/") return pathname;
+    if (!base || !pathname.toLocaleLowerCase().startsWith(base.toLowerCase())) {
+        return pathname;
+    }
+    return pathname.slice(base.length) || "/";
+}

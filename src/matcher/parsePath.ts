@@ -55,7 +55,9 @@ export function tokensToParser(tokens: Array<Token[]>): PathParser {
                     try {
                         new RegExp(`(${re})`);
                     } catch (e: any) {
-                        throw new Error(`${token.value} -> ${re}路由正则参数不是一个合法正则表达式，请检查`);
+                        throw new Error(
+                            `${token.value} -> ${re} The route regex parameter is not a valid regular expression. Please check.`
+                        );
                     }
                 }
 
@@ -121,7 +123,9 @@ export function tokensToParser(tokens: Array<Token[]>): PathParser {
                     let param: string | readonly string[] = token.value in params ? params[token.value] : "";
 
                     if (Array.isArray(param) && token.repeatable === false) {
-                        throw new Error(`${token.value} 是个数组，所以不可以使用'*'或者'+'进行重复配置`);
+                        throw new Error(
+                            `${token.value} is an array. Therefore, you cannot use '*' or '+' for repeated configuration.`
+                        );
                     }
 
                     let text: string = Array.isArray(param) ? param.join("/") : (param as string);
@@ -136,7 +140,9 @@ export function tokensToParser(tokens: Array<Token[]>): PathParser {
                                 }
                             }
                         } else {
-                            throw new Error(`${token.value}未配置可选参数，但是没有传入值`);
+                            throw new Error(
+                                `${token.value} has no optional parameters configured, but no value was provided.`
+                            );
                         }
                     }
 
@@ -278,7 +284,7 @@ export function analysisPathToTokens(path: string): Array<Token[]> {
     if (path === "/") return [[ROOT_PATH]];
 
     if (path.startsWith("/") === false) {
-        throw new Error(`路由的path属性必须是以‘/’开头的："${path}" => "/${path}"`);
+        throw new Error(`The 'path' property of a route must start with '/': "${path}" => "/${path}"`);
     }
 
     let state: TokenState = TokenState.Static;
@@ -292,7 +298,7 @@ export function analysisPathToTokens(path: string): Array<Token[]> {
     let customRe: string = "";
 
     function error(message: string): never {
-        throw new Error(`路由地址解析错误：${state}/"${buffer}":${message}`);
+        throw new Error(`Route address parsing error: ${state}/"${buffer}": ${message}`);
     }
 
     function appendBuffer() {
@@ -309,7 +315,7 @@ export function analysisPathToTokens(path: string): Array<Token[]> {
             case TokenState.ParamRegExp:
             case TokenState.ParamRegExpEnd:
                 if (partPath!.length > 1 && (char === "*" || char === "+")) {
-                    error(`可重复属性 ${buffer} 只能存在一个`);
+                    error(`The repeatable attribute ${buffer} can only appear once`);
                 }
 
                 partPath?.push({
@@ -321,8 +327,7 @@ export function analysisPathToTokens(path: string): Array<Token[]> {
                 });
                 break;
             default:
-                error(`无效的地址解析`);
-                break;
+                error(`Invalid address parsing`);
         }
 
         buffer = "";
@@ -401,12 +406,12 @@ export function analysisPathToTokens(path: string): Array<Token[]> {
                 customRe = "";
                 break;
             default:
-                error(`无效的地址解析`);
+                error(`Invalid address parsing`);
         }
     }
 
     if (state === TokenState.ParamRegExp) {
-        error(`存在未结束的正则表达式，请确认"()"是否完毕`);
+        error(`Unclosed regular expression detected. Please ensure all parentheses "()" are properly closed.`);
     }
 
     appendBuffer();

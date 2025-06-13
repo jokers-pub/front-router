@@ -1,8 +1,9 @@
-import { isEmptyObject, logger, stripBase } from "@joker.front/shared";
+import { isEmptyObject, logger } from "@joker.front/shared";
 import { LOGTAG } from "../config";
 import { RouteParams, RouteProps, RouteRecord, RouteRecordName, RouteRecordRaw, RouterOptions } from "../type";
 import { comparePathParserScore, parserPath, PathParams, PathParser } from "./parsePath";
 import { MatcherLocation, MatcherLocationRaw, MathcerResolveLocation } from "./type";
+import { stripBase } from "../utils";
 
 export interface RouteRecordMatcher extends PathParser {
     record: RouteRecord;
@@ -31,7 +32,7 @@ export class RouteMatcher {
         if (parent && parent.record.name && !routeRecord.name && !routeRecord.path) {
             logger.warn(
                 LOGTAG,
-                `该路由：name=${parent.record.name.toString()}存在一个子路由，该子路由name、path为空，请检查。`
+                `The route with name=${parent.record.name.toString()} has a child route where both the name and path are empty. Please check.`
             );
         }
 
@@ -63,7 +64,9 @@ export class RouteMatcher {
             }
 
             if (childrenRouteRecord.path === "*") {
-                throw new Error("使用（“*”）捕获所有路由，必须使用带有自定义正则表达式的参数来定义。");
+                throw new Error(
+                    `To capture all routes using ("*"), you must define them with parameters that include custom regular expressions.`
+                );
             }
 
             let matcher: RouteRecordMatcher = this.createRouteRecordMatcher(childrenRouteRecord, parent);
@@ -148,7 +151,7 @@ export class RouteMatcher {
             matcher = this.matcherNameMap.get(location.name);
 
             if (matcher === undefined) {
-                throw new Error(`未匹配到:${JSON.stringify(location)}`);
+                throw new Error(`Not Match:${JSON.stringify(location)}`);
             }
 
             name = matcher.record.name;
@@ -180,7 +183,7 @@ export class RouteMatcher {
                 ? this.matcherNameMap.get(currentLocation.name)
                 : this.matchers.find((m) => m.regexp.test(currentLocation.path));
             if (matcher === undefined) {
-                throw new Error(`未匹配到:${JSON.stringify(location)}`);
+                throw new Error(`Not Found:${JSON.stringify(location)}`);
             }
 
             name = matcher.record.name;
