@@ -548,7 +548,7 @@ export class Router {
 
         if (isPush) {
             let toPath = to.fullPath;
-            if (this.options.base && toPath.startsWith(toPath) === false) {
+            if (this.options.base && toPath.startsWith(this.options.base) === false) {
                 toPath = this.options.base + toPath;
             }
 

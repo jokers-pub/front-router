@@ -30,6 +30,10 @@
         "types/*",
         "README.md"
     ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jokers-pub/front-router.git"
+    },
     "homepage": "https://front.jokers.pub/router/introduction",
     "author": "Zohar",
     "license": "MIT",
