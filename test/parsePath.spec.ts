@@ -124,7 +124,7 @@ describe("地址解析", () => {
 
         it("异常", () => {
             //必须以‘/’开头
-            expect(() => analysisPathToTokens("aaa")).toThrowError("路由的path属性必须是以");
+            expect(() => analysisPathToTokens("aaa")).toThrowError("The 'path' property of a route must start with");
             //缺失参数
             expect(analysisPathToTokens(`/\\:`)).toEqual([[{ type: TokenType.Static, value: ":" }]]);
         });
