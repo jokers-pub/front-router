@@ -547,10 +547,12 @@ export class Router {
         let state = history.state;
 
         if (isPush) {
+            let toPath = (this.options.base || "") + to.fullPath;
+
             //如果是否次前进 || replace方式前进，则处理历史栈
             if (replace || isFirstNavigation) {
                 this.routerHistory.replace(
-                    to.fullPath,
+                    toPath,
                     Object.assign(
                         {
                             scroll: isFirstNavigation && state && state.scroll
@@ -561,7 +563,7 @@ export class Router {
             }
             //否则追加记录
             else {
-                this.routerHistory.push(to.fullPath, data);
+                this.routerHistory.push(toPath, data);
             }
         }
 
