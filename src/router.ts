@@ -582,7 +582,7 @@ export class Router {
                 newTargetLocation =
                     newTargetLocation.includes("?") || newTargetLocation.includes("#")
                         ? this.locationAsObject(newTargetLocation)
-                        : { path: newTargetLocation };
+                        : { path: (this.options.base || "") + newTargetLocation };
             }
 
             return {
