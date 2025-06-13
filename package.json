@@ -31,10 +31,6 @@
         "README.md"
     ],
     "homepage": "https://front.jokers.pub/router/introduction",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/jokers-pub/front-router.git"
-    },
     "author": "Zohar",
     "license": "MIT",
     "peerDependencies": {
