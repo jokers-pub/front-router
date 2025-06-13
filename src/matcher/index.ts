@@ -1,6 +1,6 @@
-import { isEmptyObject, logger } from "@joker.front/shared";
+import { isEmptyObject, logger, stripBase } from "@joker.front/shared";
 import { LOGTAG } from "../config";
-import { RouteParams, RouteProps, RouteRecord, RouteRecordName, RouteRecordRaw } from "../type";
+import { RouteParams, RouteProps, RouteRecord, RouteRecordName, RouteRecordRaw, RouterOptions } from "../type";
 import { comparePathParserScore, parserPath, PathParams, PathParser } from "./parsePath";
 import { MatcherLocation, MatcherLocationRaw, MathcerResolveLocation } from "./type";
 
@@ -19,8 +19,8 @@ export class RouteMatcher {
 
     public matcherNameMap: Map<RouteRecordName, RouteRecordMatcher> = new Map();
 
-    constructor(routes: Readonly<RouteRecordRaw[]>) {
-        routes.forEach((route) => this.addRoute(route));
+    constructor(private routeOption: RouterOptions) {
+        routeOption.routes.forEach((route) => this.addRoute(route));
     }
 
     public addRoute(record: RouteRecordRaw, parent?: RouteRecordMatcher, originalRecord?: RouteRecordMatcher) {
@@ -167,7 +167,7 @@ export class RouteMatcher {
 
             path = matcher.stringify(params);
         } else if ("path" in location) {
-            path = location.path;
+            path = stripBase(location.path, this.routeOption.base || "");
 
             matcher = this.matchers.find((m) => m.regexp.test(path));
 

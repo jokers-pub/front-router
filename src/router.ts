@@ -93,7 +93,7 @@ export class Router {
 
         this.routerHistory = options.history || new WebHashHistory(options.base);
 
-        this.matcher = new RouteMatcher(options.routes);
+        this.matcher = new RouteMatcher(options);
 
         router = this;
 
