@@ -547,7 +547,10 @@ export class Router {
         let state = history.state;
 
         if (isPush) {
-            let toPath = (this.options.base || "") + to.fullPath;
+            let toPath = to.fullPath;
+            if (this.options.base && toPath.startsWith(toPath) === false) {
+                toPath = this.options.base + toPath;
+            }
 
             //如果是否次前进 || replace方式前进，则处理历史栈
             if (replace || isFirstNavigation) {
