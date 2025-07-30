@@ -55,8 +55,6 @@ export default class extends Component {
 
 ## Documentation
 
-[Official Website](https://front.jokers.pub)
-
 [Help Docs](https://front.jokers.pub/router/introduction)
 
-[Low-Code Platform](https://jokers.pub)
+[Visual Coding IDE](https://jokers.pub)
