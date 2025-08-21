@@ -619,9 +619,11 @@ export class Router {
             this.readyState = !err;
 
             this.initHistoryListener();
-
-            this.readyCallbacks.callbacks.forEach((n) => {
-                n(err);
+            //确保脱离主线程
+            Promise.resolve(() => {
+                this.readyCallbacks.callbacks.forEach((n) => {
+                    n(err);
+                });
             });
 
             this.readyCallbacks.reset();
@@ -634,7 +636,10 @@ export class Router {
         this.markReady(err);
 
         if (this.errorCallbacks.callbacks.length) {
-            this.errorCallbacks.callbacks.forEach((m) => m(err, to, from));
+            //确保脱离主线程
+            Promise.resolve(() => {
+                this.errorCallbacks.callbacks.forEach((m) => m(err, to, from));
+            });
         } else {
             //MATCHER_NOT_FOUND 做异常中断
             if (isNavigationError(err, NavigationErrorTypes.MATCHER_NOT_FOUND)) {
