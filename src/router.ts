@@ -91,21 +91,24 @@ export class Router {
             logger.setLoggerLeve(options.loggerLeve);
         }
 
-        this.routerHistory = options.history || new WebHashHistory(options.base);
-
         this.matcher = new RouteMatcher(options);
 
         router = this;
 
-        if (this.route.isChanged === false) {
-            this.push(this.routerHistory.location).catch((e) => {
-                logger.warn(
-                    LOGTAG,
-                    `Failed to navigate to default address on first startup: ${this.routerHistory.location}`,
-                    e
-                );
-            });
-        }
+        //确保首次路由初始化触发的跳转 能够顺利执行路由事件
+        Promise.resolve().then(() => {
+            this.routerHistory = options.history || new WebHashHistory(options.base);
+
+            if (this.route.isChanged === false) {
+                this.push(this.routerHistory.location).catch((e) => {
+                    logger.warn(
+                        LOGTAG,
+                        `Failed to navigate to default address on first startup: ${this.routerHistory.location}`,
+                        e
+                    );
+                });
+            }
+        });
     }
 
     /**
