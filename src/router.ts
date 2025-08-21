@@ -624,12 +624,6 @@ export class Router {
                 n(err);
             });
 
-            if (err) {
-                this.errorCallbacks.callbacks.forEach((n) => {
-                    n(err, err.to, err.from);
-                });
-            }
-
             this.readyCallbacks.reset();
         }
 
