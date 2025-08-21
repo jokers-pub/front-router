@@ -43,6 +43,8 @@ export interface IRouteHistory {
 
     readonly state: HistoryState;
 
+    start(): void;
+
     push(to: string, data?: HistoryState): void;
 
     replace(to: string, data?: HistoryState): void;
@@ -72,7 +74,9 @@ export class WebHistory implements IRouteHistory {
         this.location = this.getCurrentLocation();
 
         this.state = window.history.state;
+    }
 
+    public start() {
         if (!this.state) {
             //初始化无状态时，做replace跳转，初始化数据
             this.changeLocation(

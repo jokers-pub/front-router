@@ -1,6 +1,6 @@
 {
     "name": "@joker.front/router",
-    "version": "1.0.45",
+    "version": "1.0.46",
     "description": "Joker Front Router 路由管理",
     "main": "./dist/bundle.js",
     "module": "./dist/bundle.es.js",

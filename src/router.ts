@@ -92,13 +92,12 @@ export class Router {
         }
 
         this.matcher = new RouteMatcher(options);
-
+        this.routerHistory = options.history || new WebHashHistory(options.base);
         router = this;
 
         //确保首次路由初始化触发的跳转 能够顺利执行路由事件
         Promise.resolve().then(() => {
-            this.routerHistory = options.history || new WebHashHistory(options.base);
-
+            this.routerHistory.start();
             if (this.route.isChanged === false) {
                 this.push(this.routerHistory.location).catch((e) => {
                     logger.warn(
