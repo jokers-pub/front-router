@@ -21,9 +21,10 @@
     "scripts": {
         "test": "jest",
         "test:temp": "jest test/parsePath.spec.ts",
-        "build": "joker_build_library --sourcemap=false",
-        "release": "npm run test && npm run build && joker_release_library",
-        "release:prod": "npm run test && npm run build && npm publish --access public --registry https://registry.npmjs.org/"
+        "build": "node build/index.js",
+        "build:prod": "node build/index.js --terser --sourcemap=false",
+        "release": "npm run test && npm run build && npm publish",
+        "release:prod": "npm run test && npm run build:prod && npm publish --access public --registry https://registry.npmjs.org/"
     },
     "files": [
         "dist/*",
@@ -38,11 +39,10 @@
     "author": "Zohar",
     "license": "MIT",
     "peerDependencies": {
-        "@joker.front/core": "^1.3.7"
+        "@joker.front/core": "^1.3.85"
     },
     "devDependencies": {
         "@joker.front/core": "^1.3.55",
-        "@joker.front/library-cli": "^1.2.14",
         "@joker.front/shared": "^1.5.30",
         "@types/jest": "^29.5.4",
         "@typescript-eslint/eslint-plugin": "^5.62.0",
@@ -51,6 +51,12 @@
         "jest": "^28.1.3",
         "jest-environment-jsdom": "^29.6.4",
         "ts-jest": "^28.0.8",
-        "typescript": "^5.2.2"
+        "typescript": "^5.2.2",
+        "rollup": "^4.45.1",
+        "rollup-plugin-typescript2": "^0.36.0",
+        "@rollup/plugin-commonjs": "^28.0.6",
+        "@rollup/plugin-json": "^6.1.0",
+        "@rollup/plugin-node-resolve": "^16.0.1",
+        "@rollup/plugin-terser": "^0.4.4"
     }
 }
