@@ -620,7 +620,7 @@ export class Router {
 
             this.initHistoryListener();
             //确保脱离主线程
-            Promise.resolve(() => {
+            Promise.resolve().then(() => {
                 this.readyCallbacks.callbacks.forEach((n) => {
                     n(err);
                 });
@@ -637,7 +637,7 @@ export class Router {
 
         if (this.errorCallbacks.callbacks.length) {
             //确保脱离主线程
-            Promise.resolve(() => {
+            Promise.resolve().then(() => {
                 this.errorCallbacks.callbacks.forEach((m) => m(err, to, from));
             });
         } else {
